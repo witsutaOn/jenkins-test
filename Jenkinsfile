@@ -1,13 +1,22 @@
 pipeline {
-  agent any
-  parameters {
-    gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'VERSION', type: 'PT_TAG'
-  }
-  stages {
-    stage('Example') {
-      steps {
-        git version: "${params.VERSION}", url: 'https://github.com/witsutaOn/jenkins-test.git'
-      }
+    agent any
+    parameters {
+        gitParameter name: 'TAG',
+                     type: 'PT_TAG',
+                     defaultValue: 'master'
     }
-  }
+    stages {
+        stage('Example') {
+            steps {
+                checkout([$class: 'GitSCM',
+                          branches: [[name: "${params.VERSION}"]],
+                          doGenerateSubmoduleConfigurations: false,
+                          extensions: [],
+                          gitTool: 'Default',
+                          submoduleCfg: [],
+                          userRemoteConfigs: [[url: 'https://github.com/witsutaOn/jenkins-test.git']]
+                        ])
+            }
+        }
+    }
 }
