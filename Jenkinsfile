@@ -1,21 +1,34 @@
 pipeline {
-    agent any
-    parameters {
-        gitParameter name: 'TAG',
-                     type: 'PT_TAG',
-                     defaultValue: 'master'
-    }
+    
+    agent any  
+
     stages {
-        stage('Example') {
+
+        stage('Init'){
             steps {
-                checkout([$class: 'GitSCM',
-                          branches: [[name: "${params.TAG}"]],
-                          doGenerateSubmoduleConfigurations: false,
-                          extensions: [],
-                          gitTool: 'Default',
-                          submoduleCfg: [],
-                          userRemoteConfigs: [[url: 'https://github.com/witsutaOn/jenkins-test.git']]
-                        ])
+                echo 'Init'
+                echo '******************************'
+            }
+        }
+
+        stage('Yarn Install') {
+            steps {
+                echo 'Yarn Install'
+                echo '******************************'
+            }
+        }
+
+        stage('Yarn Build') {
+            steps {
+                echo 'Yarn Build'
+                echo '******************************'
+            }
+        }
+
+        stage('Deploy') {
+            steps{
+                echo 'Deploy'
+                echo '******************************'
             }
         }
     }
