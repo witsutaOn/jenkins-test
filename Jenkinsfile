@@ -20,8 +20,7 @@ pipeline {
 
         stage('Yarn Build') {
             steps {
-                echo 'Yarn Build'
-                echo '******************************'
+                git version: "${params.VERSION}"
             }
         }
 
