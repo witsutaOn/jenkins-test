@@ -20,8 +20,8 @@ pipeline {
 
         stage('Yarn Build') {
             steps {
-                sh "mvn versions:set -DnewVersion=${params.}"
-                sh 'mvn clean package -Dmaven.test.skip=VERSIONtrue'
+                echo 'Yarn Build'
+                echo '******************************'
             }
         }
 
