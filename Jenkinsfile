@@ -9,7 +9,7 @@ pipeline {
         stage('Example') {
             steps {
                 checkout([$class: 'GitSCM',
-                          branches: [[name: "${params.VERSION}"]],
+                          branches: [[name: "${params.TAG}"]],
                           doGenerateSubmoduleConfigurations: false,
                           extensions: [],
                           gitTool: 'Default',
