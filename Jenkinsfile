@@ -1,34 +1,13 @@
 pipeline {
-    
-    agent any  
-
-    stages {
-
-        stage('Init'){
-            steps {
-                echo 'Init'
-                echo '******************************'
-            }
-        }
-
-        stage('Yarn Install') {
-            steps {
-                echo 'Yarn Install'
-                echo '******************************'
-            }
-        }
-
-        stage('Yarn Build') {
-            steps {
-                git version: "${params.VERSION}"
-            }
-        }
-
-        stage('Deploy') {
-            steps{
-                echo 'Deploy'
-                echo '******************************'
-            }
-        }
+  agent any
+  parameters {
+    gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'VERSION', type: 'PT_VERSION'
+  }
+  stages {
+    stage('Example') {
+      steps {
+        git version: "${params.VERSION}", url: 'https://github.com/witsutaOn/jenkins-test.git'
+      }
     }
+  }
 }
